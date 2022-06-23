@@ -8,7 +8,7 @@ let x, y;
 
 const checkInput = () => fiboBtn.addEventListener("click", getValueFibo);  
 
-const getValueFibo = url => {
+const getValueFibo = (url) => {
   url = `http://localhost:5050/fibonacci/${fiboInput.value}`
   fibonacci(url);
   return url;
