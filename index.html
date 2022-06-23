@@ -6,12 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>fibonacci</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
   </head>
 </head>
 <body>
     <h1 class="display-1 m-3">Fibonacci calculator</h1>
-    <span class="m-3">The fibonacci of</span> <input id="fibo_Input" type="text">
-    <h3 class = "m-3" id="fibo_text"></h3>
+    <div class="d-flex align-items-center">
+      <span class="m-3">The fibonacci of</span> <input id="fibo_Input" type="text" class="col-xs-2" placeholder="#" >
+      <button class="btn btn-primary btn-sm" id ="btn_fibo">is</button>
+      <h3 class = "m-3"><u id="fibo_text" class="m-0"></u></h3>
+    </div>
+
     <script src="./main.js"></script>
 </body>
 </html>

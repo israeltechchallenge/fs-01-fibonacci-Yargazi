@@ -1,0 +1,22 @@
+body{
+
+    padding: 10%;
+}
+
+h1{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400 !important;
+}
+
+p{
+    margin: 0px;
+    margin-right: 10px;
+}
+
+.btn{
+    margin-left: 10px;
+}
+
+#fibo_text{
+    margin-left: 10px;
+}
