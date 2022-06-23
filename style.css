@@ -20,3 +20,15 @@ p {
 #fibo_text {
     margin-left: 10px;
 }
+.danger {color: #D9534F;}
+
+.inputBorderColore {
+   border:2px solid #D9534F;
+   color: #D9534F;
+}
+#error-block-id {
+    text-align: center;
+    margin-left: 132px;
+    min-width: 173px;
+    max-width: 200px;
+}
