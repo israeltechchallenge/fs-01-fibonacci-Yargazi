@@ -1,5 +1,4 @@
 body {
-
     padding: 10%;
 }
 
@@ -20,6 +19,7 @@ p {
 #fibo_text {
     margin-left: 10px;
 }
+
 .danger {color: #D9534F;}
 
 .inputBorderColore {

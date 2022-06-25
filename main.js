@@ -1,58 +1,67 @@
-document.getElementById('fibo_spinner').hidden = true;
-document.getElementById("fibo_Input").classList.remove('inputBorderColore');
-const fiboText = document.getElementById("fibo_text");
-const fiboInput = document.getElementById("fibo_Input");
-const fiboBtn = document.getElementById("btn_fibo");
 const loader = document.getElementById('fibo_spinner');
-const errBlock = document.getElementById('error-block-id')
-
+const fiboInput = document.getElementById("fibo_Input");
+const fiboText = document.getElementById("fibo_text");
+const fiboBtn = document.getElementById("btn_fibo");
+const errBlock = document.getElementById('error-block-id');
+const errServer = document.getElementById('ifErrorInServ');
 let x, y, url;
 
+loader.hidden = true;
+fiboInput.classList.remove('inputBorderColore');
 
-const checkInput = () => fiboBtn.addEventListener("click", getValueFibo);  
+const checkInput = () => fiboBtn.addEventListener("click", getLinkFibo);  
+const fibonacci = url => (fiboInput.value > 50) ? fibo_value_fifty(url) : fibo_fetch(url);
 
-const getValueFibo = (url) => {
+const getLinkFibo = (url) => {
+
   url = `http://localhost:5050/fibonacci/${fiboInput.value}`;
   fibonacci(url);
   return url;
+
 }
 
-function fibonacci(url) {
-  if (fiboInput.value > 50) {
-    loader.hidden = false;
+const fibo_value_fifty = url => {
+
+  loader.hidden = false;
     loader.hidden = true;
-    document.getElementById("fibo_Input").classList.add('inputBorderColore');
-    document.getElementById('ifErrorInServ').hidden = true;
+    fiboInput.classList.add('inputBorderColore'); 
+    errServer.hidden = true;
     errBlock.innerHTML = 'Can’t be larger than 50';
     errBlock.classList.remove('visually-hidden');
-    return document.getElementById("fibo_text").innerHTML = (' ');
-  } else {
-    loader.hidden = false;
-    document.getElementById("fibo_Input").classList.remove('inputBorderColore');
-    try {
-    fetch(url).then((response) => {
-     response.json().then((data) => {
-      errBlock.classList.add('visually-hidden')
-      document.getElementById('ifErrorInServ').hidden = true;
-      loader.hidden = false;
-      loader.hidden = true;
-      return document.getElementById("fibo_text").innerHTML = data.result; 
-      })   
-    })
-  } 
-  catch (err) {
-    meaningOfLife();
-  } 
+    return fiboText.innerHTML = (' ');
+
 }
       
-}
+const fibo_fetch = (url) => {
+
+  loader.hidden = false;
+  fiboInput.classList.remove('inputBorderColore')
+
+  fetch(url).then((response) => {
+   response.json().then((data) => {
+    errBlock.classList.add('visually-hidden');
+    errServer.hidden = true;
+    loader.hidden = false;
+    loader.hidden = true;
+    return fiboText.innerHTML = data.result; 
+
+    }) 
+    .catch((err) => meaningOfLife());
+
+  })
+  
+};
 
 function meaningOfLife() {
+
   loader.hidden = false;
   loader.hidden = true;
-  document.getElementById('ifErrorInServ').hidden = false;
-  document.getElementById('ifErrorInServ').innerTEXT = 'Server Error: 42 is the meaning of life' 
- return document.getElementById("fibo_text").innerText = (' ') };
+  errBlock.classList.add('visually-hidden');
+  errServer.hidden = false;
+  errServer.innerText = 'Server Error: 42 is the meaning of life' 
+ return fiboText.innerText = (' ') 
+
+};
 
 
 fiboInput.addEventListener('keydown', checkInput);
