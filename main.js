@@ -76,5 +76,4 @@ function meaningOfLife(err) {
 
 };
 
-
 fiboInput.addEventListener('keydown', checkInput);
