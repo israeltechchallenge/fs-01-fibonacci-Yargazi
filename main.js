@@ -1,21 +1,24 @@
-const loader = document.getElementById('fibo_spinner');
-const fiboInput = document.getElementById("fibo_Input");
-const fiboText = document.getElementById("fibo_text");
-const fiboBtn = document.getElementById("btn_fibo");
-const errBlock = document.getElementById('error-block-id');
+const loader = document.getElementById('fiboSpinner');
+const fiboInput = document.getElementById("fiboInput");
+const fiboText = document.getElementById("fiboText");
+const fiboBtn = document.getElementById("btnFibo");
+const errBlock = document.getElementById('errorBlockId');
 const errServer = document.getElementById('ifErrorInServ');
 const resultList = document.getElementById('resultList') 
 const resLoader = document.getElementById('resultsLoader')
-let li = document. createElement("li");
-let x, y, url;
+let url;
 
 loader.hidden = true;
 resLoader.hidden = true;
 
 fiboInput.classList.remove('inputBorderColore');
 
-const checkInput = () => fiboBtn.addEventListener("click", getLinkFibo);  
+const checkInput = () => fiboBtn.addEventListener('click', (e)=> {
+  e.preventDefault();
+  getLinkFibo(); 
+})
 
+checkInput();
 // if statement of Fibonacci
 
 const fibonacci = url => {
@@ -69,16 +72,17 @@ const fiboFetch = url => {
         errServer.hidden = true;
         loader.hidden = false;
         loader.hidden = true;
-        getFiboList()  
+        cleanList();
+        getFiboList();   
         return fiboText.innerHTML = data.result; 
           
         }) 
-        .catch((err) => meaningOfLife(err));
+        .catch((err) => errorHanding(err));
   };    
 
   // Error Fucntion
 
-function meaningOfLife(err) {
+function errorHanding(err) {
 
   loader.hidden = false;
   loader.hidden = true;
@@ -92,7 +96,7 @@ function meaningOfLife(err) {
 // url of Fibonacci results and cb
 
 const getFiboList = url => {
-url = 'http://localhost:5050/getFibonacciResults ';
+url = 'http://localhost:5050/getFibonacciResults';
 fetchDataFromServer(url);
 resLoader.hidden = false;
 return url;
@@ -106,25 +110,31 @@ const fetchDataFromServer = url => {
   fetch(url)
   .then((response) => response.json())
   .then((data) => {
-    
-    data.results.forEach((elements) => {
-      const liResult = `<li class="fs-5-text border-bottom  border-secondary mt-4">The Fibonnaci Of <b>${elements.number}</b> is <b>${elements.result}</b>. Calculated at: ${(new Date(elements.createdDate)).toString()} <br> </li>`
-      resultList.insertAdjacentHTML('beforebegin', liResult);
-      
+
+    cleanList();
+    listOfResults(data)
+    return data;
       // I tried to display only 3 elements, but something is wrong.
-      if (data.results.length >= 3) {
-        let array = data.results.splice(0, 2);
-        return array;
-      }
-      resultList.insertAdjacentHTML('beforebegin', array);
+      // if (data.results.length >= 3) {
+      //   let array = data.results.splice(0, 2);
+      //   return array;
+      // }
+      // resultList.insertAdjacentHTML('beforebegin', array);
     })   
-    resLoader.hidden = true;
-    
-  })
+  }
   
-}
+  const listOfResults = data => {
+    data.results.forEach((elements) => {
+      const spanResult = `<span class="fs-5-text border-bottom  border-secondary mt-4">The Fibonnaci Of <b>${elements.number}</b> is <b>${elements.result}</b>. Calculated at: ${(new Date(elements.createdDate)).toString()} <br> </span>`
+      resultList.insertAdjacentHTML('beforebegin', spanResult);
+    })
+    resLoader.hidden = true;
+  }
+// clear list of results
+const cleanList = () => resultList.innerHTML = " ";  
+
+
 // cb function getFiboList on loading.
 window.addEventListener('load', getFiboList)
 
-// Input listener
-fiboInput.addEventListener('keydown', checkInput);
+

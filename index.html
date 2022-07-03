@@ -14,23 +14,36 @@
 </head>
 <body>
     <h1 class="display-1 m-3">Fibonacci calculator</h1>
-    <div class="d-flex align-items-center">
+
+    <form class="align-items-center form">
+    
+      <div class="d-flex align-items-center">
       <span class="m-3">The fibonacci of</span> 
-      <input id="fibo_Input" type="number" min="1" class="col-xs-2 inputBorderColore" placeholder="#">
-      <button class="btn btn-primary btn-sm" id ="btn_fibo">is</button>
-      <h3 class="m-3"><u id="fibo_text" class="m-0"></u></h3>
-      <container id="fibo_spinner" class="spinner-border m-1" role="status">
-     </container>
-     </div>
+      <input id="fiboInput" type="number" min="1" class="col-xs-2 inputBorderColore" placeholder="#">
+      <button class="btn btn-primary btn-sm" id ="btnFibo">is</button>
+      <h3 class="m-3"><u id="fiboText" class="m-0"></u></h3>
+      <container id="fiboSpinner" class="spinner-border m-1" role="status">
+      </container>
+    </div>
+    <div class="ms-3 mt-2 check-box">
+        <input class="form-check-input" type="checkbox" id="check-box" value="3" aria-label="...">
+        <label for="check-box">Save Calculation</label>
+      </div>
     <span id="ifErrorInServ" class="danger m-3"></span>
   </div>
-  <div id="error-block-id" class="alert alert-danger w-25 p-0 visually-hidden text-center;" role="alert"></div>
+  <div id="errorBlockId" class="alert alert-danger w-25 p-0 visually-hidden text-center;" role="alert"></div>
   <div class="resultList_div d-flex align-items-center">
-    <h2 class="display-4 m-3">Results</h2> 
+  </form>
+   
+    <h2 class="display-4  m-3">Results</h2> 
     <container id="resultsLoader" class="spinner-border m-1" role="status">
     </container>
   </div>
-    <ul id="resultList"></ul>
+  
+
+
+
+    <div id="resultList" mt-3 ms-5 results-container fs-5-text fw-light></div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="./main.js"></script>
 </body>
